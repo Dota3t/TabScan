@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TabScan.WpisyPage"
-             Title="WpisyPage">
+             NavigationPage.HasNavigationBar="False">
+    
     <Grid BackgroundColor="#1F1F1F" RowDefinitions="*, 1.2*, *, *, *, 4.8*" ColumnDefinitions="*, *, *, 7*">
 
         <Rectangle Grid.Column="0" Grid.RowSpan="10" BackgroundColor="#F28A48" x:Name="SideBar"></Rectangle>
@@ -23,6 +24,8 @@
         <Label Grid.Row="0" Grid.Column="3" FontAttributes="Bold" Grid.RowSpan="2" FontFamily="GrandifloraOne" Text="TabScan" FontSize="100" HorizontalOptions="Center" TextDecorations="Underline" TextColor="#E7390D"></Label>
         <Label Grid.Row="2" Grid.Column="3" Text="Wpisy:" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="10"></Label>
 
+        <Entry BackgroundColor="White" FontFamily="GrandifloraOne" FontAttributes="Bold" Grid.Column="3" Margin="10" Grid.Row="3" Placeholder="Szukaj..."></Entry>
+        
 
     </Grid>
 </ContentPage>
