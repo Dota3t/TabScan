@@ -2,23 +2,37 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+
+        bool IsMenuOpen = false;
 
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        private void SideMenuOpen(object sender, EventArgs e)
         {
-            count++;
+            if (IsMenuOpen)
+            {
+                Grid.SetColumnSpan(SideBar, 1);
+                SideBarContent.IsVisible = false;
+                IsMenuOpen = false;
+            }
+            else {
+                Grid.SetColumnSpan(SideBar, 3);
+                SideBarContent.IsVisible = true;
+                IsMenuOpen = true;
+            }
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+        private async void OpenWpisy(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new WpisyPage());
+        }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        private async void OpenSkan(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SkanPage());
         }
     }
 }
