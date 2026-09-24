@@ -21,6 +21,15 @@ namespace TabScan
             SetTimer();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+#if IOS
+        UIKit.UIView.AnimationsEnabled = false;
+#endif
+        }
+
         private void SetTimer()
         {
             timer = new System.Timers.Timer(1000);
@@ -31,11 +40,18 @@ namespace TabScan
 
         private void ForceRerender(Object? source, ElapsedEventArgs? e)
         {
-            List<Record> All = new List<Record>(Records);
-            Records.Clear();
-            foreach (var record in All)
+            //List<Record> All = new List<Record>(Records);
+            //Records.Clear();
+            //foreach (var record in All)
+            //{
+            //    Records.Add(record);
+            //}
+            int n = Records.Count;
+            for(int i = n - 1; i >= 0; --i)
             {
-                Records.Add(record);
+                Record rec = Records[i];
+                Records.RemoveAt(i);
+                Records.Insert(i, rec);
             }
         }
 
