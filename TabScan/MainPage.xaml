@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TabScan.MainPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             Shell.NavBarIsVisible="False">
 
     <Grid BackgroundColor="#1F1F1F" RowDefinitions="*, 1.2*, *, *, *, 4.8*" ColumnDefinitions="*, *, *, 7*">
         
@@ -12,18 +13,30 @@
         <Ellipse Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="#F28A48"></Ellipse>
         <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#F28A48"></Rectangle>
 
-        <StackLayout IsVisible="Hidden" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="4" x:Name="SideBarContent">
-            <Button Text="Home" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" BackgroundColor="Transparent" Clicked="SideMenuOpen"></Button>
+        <StackLayout IsVisible="False" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="4" x:Name="SideBarContent">
+            <Button Text="Home" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" BackgroundColor="#ef6e1c" Clicked="SideMenuOpen"></Button>
             <Button Text="Wpisy" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" BackgroundColor="Transparent" Clicked="OpenWpisy"></Button>
             <Button Text="Skan" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4" BackgroundColor="Transparent" Clicked="OpenSkan"></Button>
         </StackLayout>
 
 
-        <ImageButton Source="fingerprint.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" BackgroundColor="Transparent" Clicked="SideMenuOpen"></ImageButton>
+        <Button ImageSource="fingerprint.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" BackgroundColor="Transparent" Clicked="SideMenuOpen"></Button>
 
         <Label Grid.Row="0" Grid.Column="3" FontAttributes="Bold" Grid.RowSpan="2" FontFamily="GrandifloraOne" Text="TabScan" FontSize="100" HorizontalOptions="Center" TextDecorations="Underline" TextColor="#E7390D"></Label>
         <Label Grid.Row="2" Grid.Column="3" Text="Obecnie używane:" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="10"></Label>
 
+        <CollectionView Grid.Column="3" Grid.Row="3" Grid.RowSpan="3" x:Name="CVRecords" ItemsSource="{Binding Records}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="4"></GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeThickness="4" StrokeShape="RoundRectangle 4,4,4,4" Background="#F28A48" WidthRequest="50">
+                        <Label Text="{Binding StartTime}"></Label>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 
 </ContentPage>

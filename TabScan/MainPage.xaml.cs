@@ -1,13 +1,19 @@
-﻿namespace TabScan
+﻿using System.Collections.ObjectModel;
+
+namespace TabScan
 {
     public partial class MainPage : ContentPage
     {
 
         bool IsMenuOpen = false;
+        public ObservableCollection<Record> Records;
 
         public MainPage()
         {
             InitializeComponent();
+            Records = [new Record([0], "HUH", DateTime.Now, DateTime.Now + TimeSpan.FromHours(1)),
+                        new Record([0], "huh", DateTime.Now, DateTime.Now)];
+            CVRecords.ItemsSource = Records;
         }
 
         private void SideMenuOpen(object sender, EventArgs e)
