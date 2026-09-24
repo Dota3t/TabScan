@@ -11,8 +11,8 @@ namespace TabScan
         public MainPage()
         {
             InitializeComponent();
-            Records = [new Record([0], "HUH", DateTime.Now, DateTime.Now + TimeSpan.FromHours(1)),
-                        new Record([0], "huh", DateTime.Now, DateTime.Now)];
+            Records = [new Record(null, "HUH", DateTime.Now, DateTime.Now + TimeSpan.FromHours(1)),
+                        new Record(null, "huh", DateTime.Now, DateTime.Now)];
             CVRecords.ItemsSource = Records;
         }
 
