@@ -17,6 +17,11 @@
             <Button Text="Home" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" BackgroundColor="#ef6e1c" Clicked="SideMenuOpen"></Button>
             <Button Text="Wpisy" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" BackgroundColor="Transparent" Clicked="OpenWpisy"></Button>
             <Button Text="Skan" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4" BackgroundColor="Transparent" Clicked="OpenSkan"></Button>
+            <VerticalStackLayout Margin="0,100,0,0">
+                <Label FontSize="20" TextColor="#E7390D" HorizontalTextAlignment="Center" Text="Autorzy"></Label>
+                <Label FontSize="20" TextColor="#E7390D" HorizontalTextAlignment="Center" Text="Filip Tarza"></Label>
+                <Label FontSize="20" TextColor="#E7390D" HorizontalTextAlignment="Center" Text="Yevhen Maskaiev"></Label>
+            </VerticalStackLayout>
         </StackLayout>
 
 
@@ -25,7 +30,7 @@
         <Label Grid.Row="0" Grid.Column="3" FontAttributes="Bold" Grid.RowSpan="2" FontFamily="GrandifloraOne" Text="TabScan" FontSize="100" HorizontalOptions="Center" TextDecorations="Underline" TextColor="#E7390D"></Label>
         <Label Grid.Row="2" Grid.Column="3" Text="Obecnie używane:" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="10"></Label>
 
-        <CollectionView Grid.Column="3" Grid.Row="3" Grid.RowSpan="3" x:Name="CVRecords" ItemsSource="{Binding Records}">
+        <CollectionView Grid.Column="3" Grid.Row="3" Grid.RowSpan="3" x:Name="CVRecords" ItemsSource="{Binding Records}" ItemsUpdatingScrollMode="KeepScrollOffset">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="4" VerticalItemSpacing="10" HorizontalItemSpacing="10"></GridItemsLayout>
             </CollectionView.ItemsLayout>
