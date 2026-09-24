@@ -45,7 +45,7 @@ public partial class WpisyPage : ContentPage
 
     private async void OpenHome(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new MainPage());
+        await Navigation.PopToRootAsync();
     }
 
     private async void OpenSkan(object sender, EventArgs e)

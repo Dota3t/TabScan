@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 namespace TabScan
 {
-    internal class Date
+    public class Date
     {
+        public static int globalId = 0;
+        public int ID { get; set; }
         public ObservableCollection<Record> Records { get; set; }
         public DateTime date { get; set; }
         public Date()
         {
+            ID = globalId++;
             Records = new();
             date = DateTime.Now;
         }

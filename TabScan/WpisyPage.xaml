@@ -6,16 +6,21 @@
              NavigationPage.HasNavigationBar="False">
 
     <Grid BackgroundColor="#1F1F1F" RowDefinitions="*, 1.2*, *, *, *, 4.8*" ColumnDefinitions="*, *, *, 7*">
-        <Rectangle Grid.Column="0" Grid.RowSpan="10" BackgroundColor="#F28A48" x:Name="SideBar"></Rectangle>
-        <Rectangle Grid.Column="1" Grid.Row="0" BackgroundColor="#F28A48"></Rectangle>
-        <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" BackgroundColor="#F28A48"></Rectangle>
-        <Ellipse Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="#F28A48"></Ellipse>
-        <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#F28A48"></Rectangle>
+        <Rectangle Grid.Column="0" Grid.RowSpan="10" BackgroundColor="#F28A48" x:Name="SideBar" ZIndex="999"></Rectangle>
+        <Rectangle Grid.Column="1" Grid.Row="0" BackgroundColor="#F28A48" ZIndex="999"></Rectangle>
+        <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" BackgroundColor="#F28A48" ZIndex="999"></Rectangle>
+        <Ellipse Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="#F28A48" ZIndex="999"></Ellipse>
+        <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#F28A48" ZIndex="999"></Rectangle>
 
-        <StackLayout IsVisible="False" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="4" x:Name="SideBarContent">
+        <StackLayout IsVisible="False" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="4" x:Name="SideBarContent" ZIndex="999">
             <Button Text="Home" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" BackgroundColor="Transparent" Clicked="OpenHome"></Button>
             <Button Text="Wpisy" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" BackgroundColor="#ef6e1c" Clicked="SideMenuOpen"></Button>
             <Button Text="Skan" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4" BackgroundColor="Transparent" Clicked="OpenSkan"></Button>
+            <VerticalStackLayout Margin="0,100,0,0">
+                <Label FontSize="20" TextColor="#E7390D" HorizontalTextAlignment="Center" Text="Autorzy"></Label>
+                <Label FontSize="20" TextColor="#E7390D" HorizontalTextAlignment="Center" Text="Filip Tarza"></Label>
+                <Label FontSize="20" TextColor="#E7390D" HorizontalTextAlignment="Center" Text="Yevhen Maskaiev"></Label>
+            </VerticalStackLayout>
         </StackLayout>
 
         <Button ImageSource="fingerprint.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" BackgroundColor="Transparent" Clicked="SideMenuOpen"></Button>

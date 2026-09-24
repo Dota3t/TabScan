@@ -7,23 +7,34 @@ namespace TabScan
     public partial class MainPage : ContentPage
     {
         private static System.Timers.Timer timer;
+        private RecordDatabase database;
 
         bool IsMenuOpen = false;
         private ObservableCollection<Record> Records;
 
-        public MainPage()
+        public MainPage(RecordDatabase database_)
         {
             InitializeComponent();
-            Records = [new Record(new Student(0, "Filip", "Tarza", "5TP", 30), "HUH", new DateTime(2026, 9, 24, 12, 55, 0), new DateTime(2026, 9, 24, 13, 55, 0)),
-                        new Record(new Student(1, "Filip", "Tarzan", "3TUE", 11), "huh", new DateTime(2026, 9, 24, 12, 55, 0), new DateTime(2026, 9, 24, 14, 45, 0))];
+            database = database_;
+            //Records = [new Record(new Student(0, "Filip", "Tarza", "5TP", 30), "HUH", new DateTime(2026, 9, 24, 12, 55, 0), new DateTime(2026, 9, 24, 13, 55, 0)),
+            //            new Record(new Student(1, "Filip", "Tarzan", "3TUE", 11), "huh", new DateTime(2026, 9, 24, 12, 55, 0), new DateTime(2026, 9, 24, 14, 45, 0))];
+            Records = [];
             CVRecords.ItemsSource = Records;
 
             SetTimer();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
+            var dates = database.SelectAll().Result;
+            foreach(var date in dates)
+            {
+                foreach(var rec in date.Records)
+                {
+                    Records.Add(rec);
+                }
+            }
 
 #if IOS
         UIKit.UIView.AnimationsEnabled = false;
