@@ -27,12 +27,18 @@
 
         <CollectionView Grid.Column="3" Grid.Row="3" Grid.RowSpan="3" x:Name="CVRecords" ItemsSource="{Binding Records}">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="4"></GridItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="4" VerticalItemSpacing="10" HorizontalItemSpacing="10"></GridItemsLayout>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border StrokeThickness="4" StrokeShape="RoundRectangle 4,4,4,4" Background="#F28A48" WidthRequest="50">
-                        <Label Text="{Binding StartTime}"></Label>
+                    <Border StrokeThickness="3" StrokeShape="RoundRectangle 8,8,8,8" Stroke="#F28A48" HeightRequest="168" Padding="4">
+                        <Border StrokeThickness="3" StrokeShape="RoundRectangle 4,4,4,4" Stroke="#F28A48" Padding="4" >
+                            <Grid RowDefinitions="4*,4*,3*">
+                                <Label Grid.Row="0" Text="{Binding StudentID.Number}" FontAttributes="Bold" TextColor="#FF400F" FontSize="40" HorizontalTextAlignment="Center" VerticalOptions="End"></Label>
+                                <Label Grid.Row="1" Text="{Binding StudentID.Class}" FontAttributes="Bold" TextColor="#FF400F" FontSize="25" HorizontalTextAlignment="Center"  VerticalOptions="Start"></Label>
+                                <Label Grid.Row="2" Text="{Binding TimeLeft}" FontAttributes="Bold" TextColor="#FF400F" FontSize="24" HorizontalTextAlignment="Center" VerticalOptions="End"></Label>
+                            </Grid>
+                        </Border>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
