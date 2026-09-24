@@ -10,11 +10,11 @@ namespace TabScan
     internal class Date
     {
         public ObservableCollection<Record> Records { get; set; }
-        public string date { get; set; }
+        public DateTime date { get; set; }
         public Date()
         {
             Records = new();
-            date = DateTime.Now.Date.ToString();
+            date = DateTime.Now;
         }
         public void addToDate(Record newRecord)
         {

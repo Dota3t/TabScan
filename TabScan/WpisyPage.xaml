@@ -4,9 +4,8 @@
              x:Class="TabScan.WpisyPage"
              Shell.NavBarIsVisible="False"
              NavigationPage.HasNavigationBar="False">
-    
-    <Grid BackgroundColor="#1F1F1F" RowDefinitions="*, 1.2*, *, *, *, 4.8*" ColumnDefinitions="*, *, *, 7*">
 
+    <Grid BackgroundColor="#1F1F1F" RowDefinitions="*, 1.2*, *, *, *, 4.8*" ColumnDefinitions="*, *, *, 7*">
         <Rectangle Grid.Column="0" Grid.RowSpan="10" BackgroundColor="#F28A48" x:Name="SideBar"></Rectangle>
         <Rectangle Grid.Column="1" Grid.Row="0" BackgroundColor="#F28A48"></Rectangle>
         <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" BackgroundColor="#F28A48"></Rectangle>
@@ -19,32 +18,32 @@
             <Button Text="Skan" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4" BackgroundColor="Transparent" Clicked="OpenSkan"></Button>
         </StackLayout>
 
-
         <Button ImageSource="fingerprint.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" BackgroundColor="Transparent" Clicked="SideMenuOpen"></Button>
 
         <Label Grid.Row="0" Grid.Column="3" FontAttributes="Bold" Grid.RowSpan="2" FontFamily="GrandifloraOne" Text="TabScan" FontSize="100" HorizontalOptions="Center" TextDecorations="Underline" TextColor="#E7390D"></Label>
-        <Label Grid.Row="2" Grid.Column="3" Text="Wpisy:" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="10"></Label>
+        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="Wpisy:" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="10"></Label>
 
         <Entry BackgroundColor="White" FontFamily="GrandifloraOne" FontAttributes="Bold" Grid.Column="1" Margin="10" Grid.Row="3" Grid.ColumnSpan="3" Placeholder="Szukaj..."></Entry>
 
         <CollectionView x:Name="wpisyView" Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="10">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border Stroke="#AC6639"
-                         StrokeThickness="3"
-                         StrokeShape="RoundRectangle 20"
-                         BackgroundColor="#AC6639"
-                         Padding="10">
+                    <Border Stroke="#AC6639" 
+                            StrokeThickness="3" 
+                            StrokeShape="RoundRectangle 20" 
+                            BackgroundColor="#AC6639" 
+                            Padding="10"
+                            Margin="0,0,0,15">
                         <VerticalStackLayout>
-                            <Label Text="{Binding date}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="10"></Label>
-                            <CollectionView ItemsSource="{Binding Records}">
-                                <CollectionView.ItemTemplate>
+                            <Label Text="{Binding date, StringFormat='{}{0:dd.MM.yyyy}'}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="10"></Label>
+                            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Records}">
+                                <BindableLayout.ItemTemplate>
                                     <DataTemplate>
-                                        <Border Stroke="#F28A48"
-                                             StrokeThickness="3"
-                                             StrokeShape="RoundRectangle 20"
-                                             BackgroundColor="#F28A48"
-                                             Margin="10">
+                                        <Border Stroke="#F28A48" 
+                                                StrokeThickness="3" 
+                                                StrokeShape="RoundRectangle 20" 
+                                                BackgroundColor="#F28A48" 
+                                                Margin="10">
                                             <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
                                                 <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" Text="{Binding TabletId}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="10"></Label>
                                                 <HorizontalStackLayout Grid.Column="0" Grid.Row="1" Margin="5">
@@ -52,21 +51,20 @@
                                                     <Label Text="{Binding StudentID.LastName}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="5"></Label>
                                                     <Label Text="{Binding StudentID.Class}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="5"></Label>
                                                 </HorizontalStackLayout>
-                                                <HorizontalStackLayout HorizontalOptions="End" Grid.Column="1" Grid.Row="1">
-                                                    <Label Text="{Binding StartTime}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="10"></Label>
-                                                    <Label Text="-" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="10"></Label>
-                                                    <Label Text="{Binding EndTime}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="10"></Label>
+                                                <HorizontalStackLayout HorizontalOptions="End" Grid.Column="1" Grid.Row="1" Margin="5">
+                                                    <Label Text="{Binding StartTime, StringFormat='{0:HH:mm}'}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="5"></Label>
+                                                    <Label Text="-" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="5"></Label>
+                                                    <Label Text="{Binding EndTime, StringFormat='{0:HH:mm}'}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="5"></Label>
                                                 </HorizontalStackLayout>
                                             </Grid>
                                         </Border>
                                     </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
                         </VerticalStackLayout>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
     </Grid>
 </ContentPage>
