@@ -11,6 +11,7 @@ namespace TabScan
 
         bool IsMenuOpen = false;
         private ObservableCollection<Record> Records;
+        private Dictionary<int, Student> Students;
 
         public MainPage(RecordDatabase database_)
         {
@@ -19,6 +20,7 @@ namespace TabScan
             //Records = [new Record(new Student(0, "Filip", "Tarza", "5TP", 30), "HUH", new DateTime(2026, 9, 24, 12, 55, 0), new DateTime(2026, 9, 24, 13, 55, 0)),
             //            new Record(new Student(1, "Filip", "Tarzan", "3TUE", 11), "huh", new DateTime(2026, 9, 24, 12, 55, 0), new DateTime(2026, 9, 24, 14, 45, 0))];
             Records = [];
+            Students = new Dictionary<int, Student>();
             CVRecords.ItemsSource = Records;
 
             SetTimer();
@@ -27,13 +29,15 @@ namespace TabScan
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            var dates = database.SelectAll().Result;
-            foreach(var date in dates)
+            var studs = await database.SelectAllStudents();
+            foreach(var stud in studs)
             {
-                foreach(var rec in date.Records)
-                {
-                    Records.Add(rec);
-                }
+                Students.Add(stud.Id, stud);
+            }
+            var recs = await database.SelectAllRecords();
+            foreach(var rec in recs)
+            {
+                Records.Add(rec);
             }
 
 #if IOS

@@ -13,7 +13,7 @@ public class Record
         }
     }
 
-    public Student? StudentID { get; set; }
+    public int StudentID { get; set; }
     public string TabletId { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
@@ -49,7 +49,7 @@ public class Record
         EndTime = DateTime.Now;
     }
 
-    public Record(Student? studentID, string tabletId, DateTime startTime, DateTime endTime)
+    public Record(int studentID, string tabletId, DateTime startTime, DateTime endTime)
     {
         id = ID++;
         StudentID = studentID;

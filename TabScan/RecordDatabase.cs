@@ -19,27 +19,49 @@ namespace TabScan
             }
 
             database = new SQLiteAsyncConnection(databasePath, SQLite.SQLiteOpenFlags.ReadWrite | SQLite.SQLiteOpenFlags.Create);
-            var result = await database.CreateTableAsync<Date>();
+            var result = await database.CreateTableAsync<Record>();
+            result = await database.CreateTableAsync<Student>();
 
         }
 
-        public async Task<List<Date>> SelectAll()
+        public async Task<List<Record>> SelectAllRecords()
         {
             await Init();
-            return await database.Table<Date>().ToListAsync();
+            return await database.Table<Record>().ToListAsync();
         }
 
-        public async Task<int> Insert(Date item)
+        public async Task<int> InsertRecord(Record item)
         {
             await Init();
-            if(item.ID != 0)
+            if(item.Id != 0)
             {
                 return await database.UpdateAsync(item);
             }
             return await database.InsertAsync(item);
         }
 
-        public async Task<int> Delete(Date item)
+        public async Task<int> DeleteRecord(Record item)
+        {
+            await Init();
+            return await database.DeleteAsync(item);
+        }
+
+        public async Task<List<Student>> SelectAllStudents()
+        {
+            await Init();
+            return await database.Table<Student>().ToListAsync();
+        }
+        public async Task<int> InsertStudent(Student item)
+        {
+            await Init();
+            if (item.Id != 0)
+            {
+                return await database.UpdateAsync(item);
+            }
+            return await database.InsertAsync(item);
+        }
+
+        public async Task<int> DeleteStudent(Student item)
         {
             await Init();
             return await database.DeleteAsync(item);

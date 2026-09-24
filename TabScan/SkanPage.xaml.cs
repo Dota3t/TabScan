@@ -33,6 +33,6 @@ public partial class SkanPage : ContentPage
 
     private async void OpenHome(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new MainPage());
+        await Navigation.PopToRootAsync();
     }
 }

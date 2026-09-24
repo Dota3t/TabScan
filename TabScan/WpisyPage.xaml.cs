@@ -14,7 +14,7 @@ public partial class WpisyPage : ContentPage
 
     static DateTime dummyNowDate = DateTime.Now;
 
-    Record dummyRecord = new(dummyStudent, "32170983721", dummyNowDate, dummyNowDate);
+    Record dummyRecord = new(0, "32170983721", dummyNowDate, dummyNowDate);
 
 
     public WpisyPage()

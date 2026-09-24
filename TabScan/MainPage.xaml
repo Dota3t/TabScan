@@ -39,7 +39,7 @@
                     <Border StrokeThickness="3" StrokeShape="RoundRectangle 8,8,8,8" Stroke="#F28A48" HeightRequest="168" Padding="4">
                         <Border StrokeThickness="3" StrokeShape="RoundRectangle 4,4,4,4" Stroke="#F28A48" Padding="4" >
                             <Grid RowDefinitions="4*,4*,3*">
-                                <Label Grid.Row="0" Text="{Binding StudentID.Number}" FontAttributes="Bold" TextColor="#FF400F" FontSize="40" HorizontalTextAlignment="Center" VerticalOptions="End"></Label>
+                                <Label Grid.Row="0" Text="{Binding Students[StudentID].Number}" FontAttributes="Bold" TextColor="#FF400F" FontSize="40" HorizontalTextAlignment="Center" VerticalOptions="End"></Label>
                                 <Label Grid.Row="1" Text="{Binding StudentID.Class}" FontAttributes="Bold" TextColor="#FF400F" FontSize="25" HorizontalTextAlignment="Center"  VerticalOptions="Start"></Label>
                                 <Label Grid.Row="2" Text="{Binding TimeLeft}" FontAttributes="Bold" TextColor="#FF400F" FontSize="24" HorizontalTextAlignment="Center" VerticalOptions="End"></Label>
                             </Grid>
