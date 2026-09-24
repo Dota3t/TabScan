@@ -18,10 +18,14 @@
             <Button Text="Home" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" BackgroundColor="Transparent" Clicked="OpenHome"></Button>
             <Button Text="Wpisy" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" BackgroundColor="Transparent" Clicked="OpenWpisy"></Button>
             <Button Text="Skan" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4" BackgroundColor="#ef6e1c" Clicked="SideMenuOpen"></Button>
+            <VerticalStackLayout Margin="0,100,0,0">
+                <Label FontSize="20" TextColor="#E7390D" HorizontalTextAlignment="Center" Text="Autorzy"></Label>
+                <Label FontSize="20" TextColor="#E7390D" HorizontalTextAlignment="Center" Text="Filip Tarza"></Label>
+                <Label FontSize="20" TextColor="#E7390D" HorizontalTextAlignment="Center" Text="Yevhen Maskaiev"></Label>
+            </VerticalStackLayout>
         </StackLayout>
 
-
-        <Button ZIndex="100" ImageSource="fingerprint.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" BackgroundColor="Transparent" Clicked="SideMenuOpen"></Button>
+        <Button ZIndex="999" ImageSource="fingerprint.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" BackgroundColor="Transparent" Clicked="SideMenuOpen"></Button>
 
         <Label Grid.Row="0" Grid.Column="3" FontAttributes="Bold" Grid.RowSpan="2" FontFamily="GrandifloraOne" Text="TabScan" FontSize="100" HorizontalOptions="Center" TextDecorations="Underline" TextColor="#E7390D"></Label>
         <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="Skan:" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="10"></Label>

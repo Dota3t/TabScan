@@ -25,7 +25,7 @@
         </StackLayout>
 
 
-        <Button ImageSource="fingerprint.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" BackgroundColor="Transparent" Clicked="SideMenuOpen"></Button>
+        <Button ImageSource="fingerprint.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" BackgroundColor="Transparent" Clicked="SideMenuOpen" ZIndex="999"></Button>
 
         <Label Grid.Row="0" Grid.Column="3" FontAttributes="Bold" Grid.RowSpan="2" FontFamily="GrandifloraOne" Text="TabScan" FontSize="100" HorizontalOptions="Center" TextDecorations="Underline" TextColor="#E7390D"></Label>
         <Label Grid.Row="2" Grid.Column="3" Text="Obecnie używane:" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="10"></Label>
