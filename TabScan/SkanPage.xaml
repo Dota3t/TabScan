@@ -49,32 +49,51 @@
             </Border>
         </Grid>
 
-
-        <Picker x:Name="picker"
-            Title="Select a monkey"
+        <VerticalStackLayout
             Grid.Row="5"
             Grid.Column="1"
             Grid.ColumnSpan="5"
-            HeightRequest="60"
-            Margin="40"
-            TextColor="black"
-            BackgroundColor="white">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Baboon</x:String>
-                    <x:String>Capuchin Monkey</x:String>
-                    <x:String>Blue Monkey</x:String>
-                    <x:String>Squirrel Monkey</x:String>
-                    <x:String>Golden Lion Tamarin</x:String>
-                    <x:String>Howler Monkey</x:String>
-                    <x:String>Japanese Macaque</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+            Margin="0, 200, 0, 0">
+            <Picker x:Name="picker"
+                 Title="wybierz ucznia"
+                 HeightRequest="60"
+                 Margin="40"
+                 TextColor="black"
+                 BackgroundColor="white">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Uczen1</x:String>
+                        <x:String>Uczen2</x:String>
+                        <x:String>Uczen3</x:String>
+                        <x:String>Uczen4</x:String>
+                        <x:String>Uczen5</x:String>
+                        <x:String>Uczen6</x:String>
+                        <x:String>Uczen7</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Grid>
+                <HorizontalStackLayout HorizontalOptions="Start">
+                    <Button Text="-" FontSize="70" BackgroundColor="Transparent" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="30" Clicked="substractFromTime"/>
+                    <Label x:Name="lenghtDisplay" Text="00:00" FontSize="70" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="0, 40, 0, 30"></Label>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="End">
 
-
-
-
+                    <Button Text="+" FontSize="70" BackgroundColor="Transparent" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="0" Clicked="addToTime"/>
+                    <Border StrokeShape="RoundRectangle 20"
+                        Stroke="#F28A48"
+                        BackgroundColor="#F28A48"
+                        HeightRequest="90"
+                        StrokeThickness="2"
+                        WidthRequest="350"
+    
+                        Margin="30">
+                        <Button Text="DODAJ" FontSize="40" BackgroundColor="#F28A48" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="black"/>
+                    </Border>
+                </HorizontalStackLayout>
+               
+            </Grid>
+        </VerticalStackLayout>
 
     </Grid>
 </ContentPage>
