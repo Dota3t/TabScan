@@ -3,27 +3,77 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TabScan.SkanPage"
              Shell.NavBarIsVisible="False"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls">
     
     <Grid BackgroundColor="#1F1F1F" RowDefinitions="*, 1.2*, *, *, *, 4.8*" ColumnDefinitions="*, *, *, 7*">
 
-        <Rectangle Grid.Column="0" Grid.RowSpan="10" BackgroundColor="#F28A48" x:Name="SideBar"></Rectangle>
-        <Rectangle Grid.Column="1" Grid.Row="0" BackgroundColor="#F28A48"></Rectangle>
-        <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" BackgroundColor="#F28A48"></Rectangle>
-        <Ellipse Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="#F28A48"></Ellipse>
-        <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#F28A48"></Rectangle>
+        <Rectangle Grid.Column="0" Grid.RowSpan="10" BackgroundColor="#F28A48" x:Name="SideBar" ZIndex="100"></Rectangle>
+        <Rectangle Grid.Column="1" Grid.Row="0" BackgroundColor="#F28A48" ZIndex="100"></Rectangle>
+        <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" BackgroundColor="#F28A48" ZIndex="100"></Rectangle>
+        <Ellipse Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="#F28A48" ZIndex="100"></Ellipse>
+        <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#F28A48" ZIndex="100"></Rectangle>
 
-        <StackLayout IsVisible="False" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="4" x:Name="SideBarContent">
+        <StackLayout IsVisible="False" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="4" x:Name="SideBarContent" ZIndex="100">
             <Button Text="Home" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" BackgroundColor="Transparent" Clicked="OpenHome"></Button>
             <Button Text="Wpisy" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" BackgroundColor="Transparent" Clicked="OpenWpisy"></Button>
             <Button Text="Skan" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4" BackgroundColor="#ef6e1c" Clicked="SideMenuOpen"></Button>
         </StackLayout>
 
 
-        <Button ImageSource="fingerprint.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" BackgroundColor="Transparent" Clicked="SideMenuOpen"></Button>
+        <Button ZIndex="100" ImageSource="fingerprint.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" BackgroundColor="Transparent" Clicked="SideMenuOpen"></Button>
 
         <Label Grid.Row="0" Grid.Column="3" FontAttributes="Bold" Grid.RowSpan="2" FontFamily="GrandifloraOne" Text="TabScan" FontSize="100" HorizontalOptions="Center" TextDecorations="Underline" TextColor="#E7390D"></Label>
-        <Label Grid.Row="2" Grid.Column="3" Text="Skan:" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="10"></Label>
+        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="Skan:" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="10"></Label>
+
+        <Grid Grid.Row="3"
+          Grid.RowSpan="2"
+          Grid.Column="3"
+          Grid.ColumnSpan="3"
+          IsClippedToBounds="True"
+          WidthRequest="700"
+          HeightRequest="500"
+          Margin="0,150,175,0">
+
+            <Border StrokeShape="RoundRectangle 20"
+            Stroke="#E7390D"
+            StrokeThickness="2">
+
+                <zxing:CameraBarcodeReaderView
+                x:Name="cameraView"
+                IsTorchOn="False"
+                IsDetecting="True"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill" />
+
+            </Border>
+        </Grid>
+
+
+        <Picker x:Name="picker"
+            Title="Select a monkey"
+            Grid.Row="5"
+            Grid.Column="1"
+            Grid.ColumnSpan="5"
+            HeightRequest="60"
+            Margin="40"
+            TextColor="black"
+            BackgroundColor="white">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Baboon</x:String>
+                    <x:String>Capuchin Monkey</x:String>
+                    <x:String>Blue Monkey</x:String>
+                    <x:String>Squirrel Monkey</x:String>
+                    <x:String>Golden Lion Tamarin</x:String>
+                    <x:String>Howler Monkey</x:String>
+                    <x:String>Japanese Macaque</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+
+
 
 
     </Grid>
