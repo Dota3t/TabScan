@@ -18,7 +18,7 @@ public partial class SkanPage : ContentPage
         List<string> studentList = new();
         foreach(Student student in database.SelectAllStudents().Result)
         {
-            studentList.Add(student.FirstName + "" + student.LastName);
+            studentList.Add(student.FirstName + " " + student.LastName);
         }
         picker.ItemsSource = studentList;
 	}
@@ -115,7 +115,7 @@ public partial class SkanPage : ContentPage
         {
             Student selected = database.SelectAllStudents().Result.Find(s => (s.FirstName + " " + s.LastName) == selectedStudent);
             Record newRecord = new Record(selected.Id, ScanValue, DateTime.Now, DateTime.Now.AddHours(hours).AddMinutes(minutes));
-            database.InsertRecord(newRecord);
+            await database.InsertRecord(newRecord);
         }
     }
 }
