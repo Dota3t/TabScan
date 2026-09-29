@@ -4,7 +4,7 @@ namespace TabScan;
 
 public partial class WpisyPage : ContentPage
 {
-
+    private RecordDatabase database;
     bool IsMenuOpen = false;
     ObservableCollection<Date> dateCollection = new();
 
@@ -17,15 +17,16 @@ public partial class WpisyPage : ContentPage
     Record dummyRecord = new(0, "32170983721", dummyNowDate, dummyNowDate);
 
 
-    public WpisyPage()
-	{
-		InitializeComponent();
+    public WpisyPage(RecordDatabase database_)
+    {
+        InitializeComponent();
 
         dummyDate.addToDate(dummyRecord);
         dateCollection.Add(dummyDate);
 
         wpisyView.ItemsSource = dateCollection;
-	}
+        database = database_;
+    }
 
     private void SideMenuOpen(object sender, EventArgs e)
     {
@@ -50,7 +51,7 @@ public partial class WpisyPage : ContentPage
 
     private async void OpenSkan(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new SkanPage());
+        await Navigation.PushAsync(new SkanPage(database));
     }
 
 }

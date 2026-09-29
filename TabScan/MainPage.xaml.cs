@@ -87,12 +87,12 @@ namespace TabScan
 
         private async void OpenWpisy(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new WpisyPage());
+            await Navigation.PushAsync(new WpisyPage(database));
         }
 
         private async void OpenSkan(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SkanPage());
+            await Navigation.PushAsync(new SkanPage(database));
         }
     }
 }

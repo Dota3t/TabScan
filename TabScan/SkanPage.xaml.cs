@@ -2,14 +2,15 @@ namespace TabScan;
 
 public partial class SkanPage : ContentPage
 {
-
+    private RecordDatabase database;
     bool IsMenuOpen = false;
     int minutes = 0;
     int hours = 0;
 
-    public SkanPage()
+    public SkanPage(RecordDatabase database_)
 	{
 		InitializeComponent();
+        database = database_;
 	}
 
     private void SideMenuOpen(object sender, EventArgs e)
@@ -52,7 +53,7 @@ public partial class SkanPage : ContentPage
 
     private async void OpenWpisy(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new WpisyPage());
+        await Navigation.PushAsync(new WpisyPage(database));
     }
 
     private async void OpenHome(object sender, EventArgs e)
