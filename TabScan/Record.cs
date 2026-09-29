@@ -1,3 +1,5 @@
+using SQLite;
+
 namespace TabScan;
 
 public class Record
@@ -5,6 +7,7 @@ public class Record
     private static int ID = 0;
 
     private int id;
+    [PrimaryKey]
     public int Id
     {
         get
@@ -14,6 +17,8 @@ public class Record
     }
 
     public int StudentID { get; set; }
+    [Ignore]
+    public Student? StudentData { get; set; }
     public string TabletId { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }

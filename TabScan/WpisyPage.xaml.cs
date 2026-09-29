@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace TabScan;
 
@@ -8,24 +9,24 @@ public partial class WpisyPage : ContentPage
     bool IsMenuOpen = false;
     ObservableCollection<Date> dateCollection = new();
 
-    Date dummyDate = new();
-
-    static Student dummyStudent = new(1, "Filip", "Tarza", "5TP", 31);
-
-    static DateTime dummyNowDate = DateTime.Now;
-
-    Record dummyRecord = new(0, "32170983721", dummyNowDate, dummyNowDate);
-
 
     public WpisyPage(RecordDatabase database_)
     {
         InitializeComponent();
 
-        dummyDate.addToDate(dummyRecord);
-        dateCollection.Add(dummyDate);
-
         wpisyView.ItemsSource = dateCollection;
         database = database_;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        var dates = await database.SelectAllDates();
+        Debug.WriteLine(dates.Count);
+        foreach(var date in dates)
+        {
+            dateCollection.Add(date);
+        }
     }
 
     private void SideMenuOpen(object sender, EventArgs e)

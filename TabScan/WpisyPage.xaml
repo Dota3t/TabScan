@@ -52,9 +52,9 @@
                                             <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
                                                 <Label Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" Text="{Binding TabletId}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="10"></Label>
                                                 <HorizontalStackLayout Grid.Column="0" Grid.Row="1" Margin="5">
-                                                    <Label Text="{Binding StudentID.FirstName}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="5"></Label>
-                                                    <Label Text="{Binding StudentID.LastName}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="5"></Label>
-                                                    <Label Text="{Binding StudentID.Class}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="5"></Label>
+                                                    <Label Text="{Binding StudentData.FirstName}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="5"></Label>
+                                                    <Label Text="{Binding StudentData.LastName}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="5"></Label>
+                                                    <Label Text="{Binding StudentData.Class}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="5"></Label>
                                                 </HorizontalStackLayout>
                                                 <HorizontalStackLayout HorizontalOptions="End" Grid.Column="1" Grid.Row="1" Margin="5">
                                                     <Label Text="{Binding StartTime, StringFormat='{0:HH:mm}'}" FontSize="30" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="White" Margin="5"></Label>

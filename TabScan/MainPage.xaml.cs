@@ -29,20 +29,11 @@ namespace TabScan
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            var studs = await database.SelectAllStudents();
-            foreach(var stud in studs)
-            {
-                Students.Add(stud.Id, stud);
-            }
-            var recs = await database.SelectAllRecords();
+            var recs = await database.SelectAllRecordsFilled();
             foreach(var rec in recs)
             {
                 Records.Add(rec);
             }
-
-#if IOS
-        UIKit.UIView.AnimationsEnabled = false;
-#endif
         }
 
         private void SetTimer()

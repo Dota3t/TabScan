@@ -12,12 +12,18 @@ namespace TabScan
         public static int globalId = 0;
         public int ID { get; set; }
         public ObservableCollection<Record> Records { get; set; }
-        public DateTime date { get; set; }
+        public DateOnly date { get; set; }
         public Date()
         {
             ID = globalId++;
             Records = new();
-            date = DateTime.Now;
+            date = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+        }
+        public Date(DateOnly date_, Record record)
+        {
+            ID = globalId++;
+            Records = new([record]);
+            date = date_;
         }
         public void addToDate(Record newRecord)
         {
