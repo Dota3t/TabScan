@@ -5,15 +5,9 @@ namespace TabScan;
 public class Record
 {
     private static int ID = 0;
-
-    private int id;
-    [PrimaryKey]
     public int Id
     {
-        get
-        {
-            return id;
-        }
+        get;set;
     }
 
     public int StudentID { get; set; }
@@ -48,7 +42,7 @@ public class Record
 
     public Record()
     {
-        id = ID++;
+        Id = ID++;
         TabletId = string.Empty;
         StartTime = DateTime.Now;
         EndTime = DateTime.Now;
@@ -56,7 +50,7 @@ public class Record
 
     public Record(int studentID, string tabletId, DateTime startTime, DateTime endTime)
     {
-        id = ID++;
+        Id = ID++;
         StudentID = studentID;
         TabletId = tabletId;
         if(endTime < startTime) throw new Exception("endTime must be greater than startTime");

@@ -14,7 +14,9 @@ namespace TabScan
         async Task Init()
         {
             if(database is not null)
-            { 
+            {
+                await database.DeleteAllAsync<Record>();
+                await database.DeleteAllAsync<Student>();
                 return;
             }
 
@@ -26,23 +28,29 @@ namespace TabScan
             await InsertRecord(new Record(0, "340i9", new DateTime(2026, 9, 29, 9, 0, 0), new DateTime(2026, 9, 29, 9, 45, 0)));
         }
 
-        public async Task<List<Record>> SelectAllRecords()
+        public async Task<List<Record>> SelectAllRecords(Func<Record, bool>? where=null)
         {
             await Init();
-            return await database.Table<Record>().ToListAsync();
+            List<Record> recs = await database.Table<Record>().ToListAsync();
+            if (recs.Count == 0) return [];
+
+            if (where is null) return recs;
+            return new List<Record>(recs.Where(where));
         }
 
-        public async Task<List<Record>> SelectAllRecordsFilled()
+        public async Task<List<Record>> SelectAllRecordsFilled(Func<Record, bool>? where=null)
         {
             await Init();
-            List<Record> recs = database.Table<Record>().ToListAsync().Result;
-            List<Student> studs = database.Table<Student>().ToListAsync().Result;
+            List<Record> recs = await database.Table<Record>().ToListAsync();
+            List<Student> studs = await database.Table<Student>().ToListAsync();
+            if (recs.Count == 0 || studs.Count == 0) return [];
             for(int i = 0; i < recs.Count; ++i)
             {
                 recs[i].StudentData = studs[recs[i].StudentID];
             }
 
-            return recs;
+            if (where is null) return recs;
+            return new List<Record>(recs.Where(where));
         }
 
         public async Task<int> InsertRecord(Record item)
@@ -61,10 +69,13 @@ namespace TabScan
             return await database.DeleteAsync(item);
         }
 
-        public async Task<List<Student>> SelectAllStudents()
+        public async Task<List<Student>> SelectAllStudents(Func<Student, bool>? where=null)
         {
             await Init();
-            return await database.Table<Student>().ToListAsync();
+            List<Student> studs = await database.Table<Student>().ToListAsync();
+            if (studs.Count == 0) return [];
+            if (where is null) return studs;
+            return new List<Student>(studs.Where(where));
         }
         public async Task<int> InsertStudent(Student item)
         {
@@ -82,21 +93,27 @@ namespace TabScan
             return await database.DeleteAsync(item);
         }
 
-        public async Task<List<Date>> SelectAllDates()
+        public async Task<List<Date>> SelectAllDates(Func<Record, bool>? where=null)
         {
             await Init();
-            List<Record> recs = SelectAllRecordsFilled().Result;
+            List<Record> recs = await SelectAllRecordsFilled();
+            if (recs.Count == 0) return [];
             List<Date> dates = [];
             List<DateOnly> usedDates = [];
             foreach(Record rec in recs)
             {
-                DateOnly date = new DateOnly(rec.StartTime.Year, rec.StartTime.Month, rec.StartTime.Day);
-                int index = usedDates.IndexOf(date);
-                if(index != -1){
-                    dates[index].addToDate(rec);    
-                } else
+                if (where(rec))
                 {
-                    dates.Add(new Date(date, rec));
+                    DateOnly date = new DateOnly(rec.StartTime.Year, rec.StartTime.Month, rec.StartTime.Day);
+                    int index = usedDates.IndexOf(date);
+                    if (index != -1)
+                    {
+                        dates[index].addToDate(rec);
+                    }
+                    else
+                    {
+                        dates.Add(new Date(date, rec));
+                    }
                 }
             }
 

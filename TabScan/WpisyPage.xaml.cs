@@ -21,6 +21,7 @@ public partial class WpisyPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        Debug.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         var dates = await database.SelectAllDates();
         Debug.WriteLine(dates.Count);
         foreach(var date in dates)

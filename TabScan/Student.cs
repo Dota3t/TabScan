@@ -5,7 +5,6 @@ namespace TabScan;
 public class Student
 {
     static int globalId = 0;
-    [PrimaryKey]
     public int Id { get; set; }
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
