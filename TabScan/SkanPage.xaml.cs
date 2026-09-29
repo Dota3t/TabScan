@@ -4,6 +4,7 @@ namespace TabScan;
 
 public partial class SkanPage : ContentPage
 {
+    private List<string> studentList;
     private RecordDatabase database;
     bool IsMenuOpen = false;
     int minutes = 0;
@@ -15,17 +16,18 @@ public partial class SkanPage : ContentPage
 	{
 		InitializeComponent();
         database = database_;
-        List<string> studentList = new();
-        foreach(Student student in database.SelectAllStudents().Result)
-        {
-            studentList.Add(student.FirstName + "" + student.LastName);
-        }
         picker.ItemsSource = studentList;
 	}
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
+        var students = await database.SelectAllStudents();
+        List<string> studentList = new();
+        foreach (Student student in students)
+        {
+            studentList.Add(student.FirstName + "" + student.LastName);
+        }
 
         cameraView.Options = new BarcodeReaderOptions
         {
@@ -114,8 +116,11 @@ public partial class SkanPage : ContentPage
         if((minutes > 0 || hours > 0) && selectedStudent != "")
         {
             Student selected = database.SelectAllStudents().Result.Find(s => (s.FirstName + " " + s.LastName) == selectedStudent);
-            Record newRecord = new Record(selected.Id, ScanValue, DateTime.Now, DateTime.Now.AddHours(hours).AddMinutes(minutes));
-            database.InsertRecord(newRecord);
+            if (selected is not null)
+            {
+                Record newRecord = new Record(selected.Id, ScanValue, DateTime.Now, DateTime.Now.AddHours(hours).AddMinutes(minutes));
+                await database.InsertRecord(newRecord);
+            }
         }
     }
 }
