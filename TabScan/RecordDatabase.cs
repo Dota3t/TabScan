@@ -15,12 +15,14 @@ namespace TabScan
         {
             if(database is not null)
             {
+                //await InsertStudent(new Student("Filip", "Tarza", "5TP", 30));
                 return;
             }
 
             database = new SQLiteAsyncConnection(databasePath, SQLite.SQLiteOpenFlags.ReadWrite | SQLite.SQLiteOpenFlags.Create);
             var result = await database.CreateTableAsync<Record>();
             result = await database.CreateTableAsync<Student>();
+            //await InsertStudent(new Student("Filip", "Tarza", "5TP", 30));
         }
 
         public async Task<List<Record>> SelectAllRecords(Func<Record, bool>? where=null)
