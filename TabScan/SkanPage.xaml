@@ -67,7 +67,7 @@
             <Grid>
                 <HorizontalStackLayout HorizontalOptions="Start">
                     <Button Text="-" FontSize="70" BackgroundColor="Transparent" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="30" Clicked="substractFromTime"/>
-                    <Label x:Name="lenghtDisplay" Text="00:00" FontSize="70" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="0, 40, 0, 30"></Label>
+                    <Label x:Name="lenghtDisplay" Text="00:45" FontSize="70" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="0, 40, 0, 30"></Label>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout HorizontalOptions="End">
 

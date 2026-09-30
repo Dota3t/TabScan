@@ -4,24 +4,23 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SQLite;
 
 namespace TabScan
 {
     public class Date
     {
-        public static int globalId = 0;
+        [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public ObservableCollection<Record> Records { get; set; }
         public DateOnly date { get; set; }
         public Date()
         {
-            ID = globalId++;
             Records = new();
             date = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
         }
         public Date(DateOnly date_, Record record)
         {
-            ID = globalId++;
             Records = new([record]);
             date = date_;
         }

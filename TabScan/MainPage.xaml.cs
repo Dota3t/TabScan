@@ -20,42 +20,17 @@ namespace TabScan
             Records = [];
             Students = new Dictionary<int, Student>();
             CVRecords.ItemsSource = Records;
-
-            SetTimer();
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            var recs = await database.SelectAllRecordsFilled();
-            foreach(var rec in recs)
+            IsMenuOpen = false;
+            Records.Clear();
+            var recs = await database.SelectAllRecordsFilled((r) => r.EndTime > DateTime.Now);
+            foreach (var rec in recs)
             {
                 Records.Add(rec);
-            }
-        }
-
-        private void SetTimer()
-        {
-            timer = new System.Timers.Timer(1000);
-            timer.Elapsed += ForceRerender;
-            timer.AutoReset = true;
-            timer.Enabled = true;
-        }
-
-        private void ForceRerender(Object? source, ElapsedEventArgs? e)
-        {
-            //List<Record> All = new List<Record>(Records);
-            //Records.Clear();
-            //foreach (var record in All)
-            //{
-            //    Records.Add(record);
-            //}
-            int n = Records.Count;
-            for(int i = n - 1; i >= 0; --i)
-            {
-                Record rec = Records[i];
-                Records.RemoveAt(i);
-                Records.Insert(i, rec);
             }
         }
 
@@ -76,11 +51,13 @@ namespace TabScan
 
         private async void OpenWpisy(object sender, EventArgs e)
         {
+            SideMenuOpen(sender, e);
             await Navigation.PushAsync(new WpisyPage(database));
         }
 
         private async void OpenSkan(object sender, EventArgs e)
         {
+            SideMenuOpen(sender, e);
             await Navigation.PushAsync(new SkanPage(database));
         }
     }

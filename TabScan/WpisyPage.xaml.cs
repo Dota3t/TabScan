@@ -21,10 +21,10 @@ public partial class WpisyPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        Debug.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        IsMenuOpen = false;
+        dateCollection.Clear();
         var dates = await database.SelectAllDates();
-        Debug.WriteLine(dates.Count);
-        foreach(var date in dates)
+        foreach (var date in dates)
         {
             dateCollection.Add(date);
         }
@@ -48,11 +48,13 @@ public partial class WpisyPage : ContentPage
 
     private async void OpenHome(object sender, EventArgs e)
     {
+        SideMenuOpen(sender, e);
         await Navigation.PopToRootAsync();
     }
 
     private async void OpenSkan(object sender, EventArgs e)
     {
+        SideMenuOpen(sender, e);
         await Navigation.PushAsync(new SkanPage(database));
     }
 

@@ -15,17 +15,12 @@ namespace TabScan
         {
             if(database is not null)
             {
-                await database.DeleteAllAsync<Record>();
-                await database.DeleteAllAsync<Student>();
                 return;
             }
 
             database = new SQLiteAsyncConnection(databasePath, SQLite.SQLiteOpenFlags.ReadWrite | SQLite.SQLiteOpenFlags.Create);
             var result = await database.CreateTableAsync<Record>();
             result = await database.CreateTableAsync<Student>();
-
-            await InsertStudent(new Student("Filip", "Tarza", "5TP", 30));
-            await InsertRecord(new Record(0, "340i9", new DateTime(2026, 9, 29, 9, 0, 0), new DateTime(2026, 9, 29, 9, 45, 0)));
         }
 
         public async Task<List<Record>> SelectAllRecords(Func<Record, bool>? where=null)
@@ -100,9 +95,11 @@ namespace TabScan
             if (recs.Count == 0) return [];
             List<Date> dates = [];
             List<DateOnly> usedDates = [];
+            int i = 0;
+            
             foreach(Record rec in recs)
             {
-                if (where(rec))
+                if (where is null || where(rec))
                 {
                     DateOnly date = new DateOnly(rec.StartTime.Year, rec.StartTime.Month, rec.StartTime.Day);
                     int index = usedDates.IndexOf(date);
@@ -113,8 +110,11 @@ namespace TabScan
                     else
                     {
                         dates.Add(new Date(date, rec));
+                        usedDates.Add(date);
                     }
                 }
+
+                ++i;
             }
 
             return dates;

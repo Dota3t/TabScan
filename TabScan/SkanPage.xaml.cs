@@ -1,15 +1,17 @@
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using ZXing.Net.Maui;
 
 namespace TabScan;
 
 public partial class SkanPage : ContentPage
 {
-    private List<string> studentList;
+    private ObservableCollection<string> studentList = new();
     private RecordDatabase database;
     bool IsMenuOpen = false;
-    int minutes = 0;
+    int minutes = 45;
     int hours = 0;
-    string ScanValue = "";
+    string ScanValue = "4F3F2D";
     string selectedStudent = "";
 
     public SkanPage(RecordDatabase database_)
@@ -22,20 +24,21 @@ public partial class SkanPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        IsMenuOpen = false;
+        studentList.Clear();
         var students = await database.SelectAllStudents();
-        List<string> studentList = new();
         foreach (Student student in students)
         {
-            studentList.Add(student.FirstName + "" + student.LastName);
+            studentList.Add(student.FirstName + " " + student.LastName);
         }
-
+/*
         cameraView.Options = new BarcodeReaderOptions
         {
             Formats = BarcodeFormats.OneDimensional | BarcodeFormats.TwoDimensional,
             AutoRotate = true,
             Multiple = true,
             TryHarder = true
-        };
+        };*/
     }
 
     private async void CameraView_BarcodeDetected(object sender, BarcodeDetectionEventArgs e)
@@ -80,7 +83,14 @@ public partial class SkanPage : ContentPage
 
     private void changeTime(int change)
     {
-        if(minutes > 0 && minutes < 60) { minutes += change; }
+        if (minutes > 0 && minutes < 60)
+        {
+            minutes += change;
+            if (minutes == 0 && hours == 0)
+            {
+                minutes = 5;
+            }
+        }
         else if(minutes == 0) { 
             if (hours > 0 && change < 0) { minutes = 55; hours -= 1; }
             else if (change > 0) { minutes += 5; }
@@ -92,17 +102,18 @@ public partial class SkanPage : ContentPage
 
     private async void OpenWpisy(object sender, EventArgs e)
     {
+        SideMenuOpen(sender, e);
         await Navigation.PushAsync(new WpisyPage(database));
     }
 
     private async void OpenHome(object sender, EventArgs e)
     {
+        SideMenuOpen(sender, e);
         await Navigation.PopToRootAsync();
     }
 
     private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
     {
-        Picker picker = (Picker)sender;
         int selectedIndex = picker.SelectedIndex;
 
         if (selectedIndex != -1)
@@ -115,11 +126,12 @@ public partial class SkanPage : ContentPage
     {
         if((minutes > 0 || hours > 0) && selectedStudent != "")
         {
-            Student selected = database.SelectAllStudents().Result.Find(s => (s.FirstName + " " + s.LastName) == selectedStudent);
+            Student selected = (await database.SelectAllStudents((s) => s.FirstName + " " + s.LastName == selectedStudent))[0];
             if (selected is not null)
             {
                 Record newRecord = new Record(selected.Id, ScanValue, DateTime.Now, DateTime.Now.AddHours(hours).AddMinutes(minutes));
                 await database.InsertRecord(newRecord);
+                await Navigation.PopToRootAsync();
             }
         }
     }
