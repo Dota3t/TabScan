@@ -17,7 +17,7 @@
             <Button Text="Home" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" BackgroundColor="#ef6e1c" Clicked="SideMenuOpen"></Button>
             <Button Text="Wpisy" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" BackgroundColor="Transparent" Clicked="OpenWpisy"></Button>
             <Button Text="Skan" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" FontSize="40" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="4" BackgroundColor="Transparent" Clicked="OpenSkan"></Button>
-            <VerticalStackLayout Margin="0,100,0,0">
+            <VerticalStackLayout Margin="0,120,0,0">
                 <Label FontSize="20" TextColor="#E7390D" HorizontalTextAlignment="Center" Text="Autorzy"></Label>
                 <Label FontSize="20" TextColor="#E7390D" HorizontalTextAlignment="Center" Text="Filip Tarza"></Label>
                 <Label FontSize="20" TextColor="#E7390D" HorizontalTextAlignment="Center" Text="Yevhen Maskaiev"></Label>
@@ -37,7 +37,23 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border StrokeThickness="3" StrokeShape="RoundRectangle 8,8,8,8" Stroke="#F28A48" HeightRequest="168" Padding="4">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border"
+                                         Binding="{Binding IsLittleTimeLeft}"
+                                         Value="true">
+                                <Setter Property="Stroke" Value="#D93530" />
+                                <Setter Property="StrokeThickness" Value="5" />
+                            </DataTrigger>
+                        </Border.Triggers>
                         <Border StrokeThickness="3" StrokeShape="RoundRectangle 4,4,4,4" Stroke="#F28A48" Padding="4" >
+                            <Border.Triggers>
+                                <DataTrigger TargetType="Border"
+                                             Binding="{Binding IsLittleTimeLeft}"
+                                             Value="true">
+                                    <Setter Property="Stroke" Value="#D93530" />
+                                    <Setter Property="StrokeThickness" Value="5" />
+                                </DataTrigger>
+                            </Border.Triggers>
                             <Grid RowDefinitions="4*,4*,3*">
                                 <Label Grid.Row="0" Text="{Binding StudentData.Number}" FontAttributes="Bold" TextColor="#FF400F" FontSize="40" HorizontalTextAlignment="Center" VerticalOptions="End"></Label>
                                 <Label Grid.Row="1" Text="{Binding StudentData.Class}" FontAttributes="Bold" TextColor="#FF400F" FontSize="25" HorizontalTextAlignment="Center"  VerticalOptions="Start"></Label>

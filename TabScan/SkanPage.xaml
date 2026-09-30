@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TabScan.SkanPage"
              Shell.NavBarIsVisible="False"
-             NavigationPage.HasNavigationBar="False"
-             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls">
+             NavigationPage.HasNavigationBar="False">
+             <!--xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls">-->
     
     <Grid BackgroundColor="#1F1F1F" RowDefinitions="*, 1.2*, *, *, *, 4.8*" ColumnDefinitions="*, *, *, 7*">
 
@@ -42,13 +42,13 @@
             <Border StrokeShape="RoundRectangle 20"
             Stroke="#E7390D"
             StrokeThickness="2">
-                <zxing:CameraBarcodeReaderView
+                <!--<zxing:CameraBarcodeReaderView
                     x:Name="cameraView"
                     IsTorchOn="False"
                     IsDetecting="True"
                     BarcodesDetected="CameraView_BarcodeDetected"
                     HorizontalOptions="Fill"
-                    VerticalOptions="Fill" />
+                    VerticalOptions="Fill" />-->
             </Border>
         </Grid>
 
@@ -67,7 +67,7 @@
             <Grid>
                 <HorizontalStackLayout HorizontalOptions="Start">
                     <Button Text="-" FontSize="70" BackgroundColor="Transparent" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="30" Clicked="substractFromTime"/>
-                    <Label x:Name="lenghtDisplay" Text="00:45" FontSize="70" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="0, 40, 0, 30"></Label>
+                    <Label x:Name="lenghtDisplay" Text="01:30" FontSize="70" FontAttributes="Bold" FontFamily="GrandifloraOne" TextColor="#E7390D" Margin="0, 40, 0, 30"></Label>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout HorizontalOptions="End">
 

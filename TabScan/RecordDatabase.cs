@@ -109,8 +109,8 @@ namespace TabScan
                     }
                     else
                     {
-                        dates.Add(new Date(date, rec));
-                        usedDates.Add(date);
+                        dates.Insert(0, new Date(date, rec));
+                        usedDates.Insert(0, date);
                     }
                 }
 

@@ -20,6 +20,7 @@ namespace TabScan
             Records = [];
             Students = new Dictionary<int, Student>();
             CVRecords.ItemsSource = Records;
+            ExpiredCheckTimer();
         }
 
         protected override async void OnAppearing()
@@ -31,6 +32,25 @@ namespace TabScan
             foreach (var rec in recs)
             {
                 Records.Add(rec);
+            }
+        }
+
+        private void ExpiredCheckTimer()
+        {
+            timer = new System.Timers.Timer(2000);
+            timer.Elapsed += RemoveExpired;
+            timer.Enabled = true;
+            timer.AutoReset = true;
+        }
+
+        private void RemoveExpired(object? sender, ElapsedEventArgs? e)
+        {
+            for (int i = Records.Count - 1; i >= 0; i--)
+            {
+                if (Records[i].EndTime <= DateTime.Now)
+                {
+                    Records.RemoveAt(i);
+                }
             }
         }
 

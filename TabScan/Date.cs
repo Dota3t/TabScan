@@ -26,7 +26,7 @@ namespace TabScan
         }
         public void addToDate(Record newRecord)
         {
-            Records.Add(newRecord);
+            Records.Insert(0, newRecord);
         }
     }
 }

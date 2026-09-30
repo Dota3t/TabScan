@@ -42,6 +42,16 @@ public class Record : INotifyPropertyChanged
         }
     }
 
+    [Ignore]
+    public bool IsLittleTimeLeft
+    {
+        get
+        {
+            TimeSpan ts = EndTime - GetNow();
+            return ts.TotalMinutes <= 10;
+        }
+    }
+
     private System.Timers.Timer? timer;
     public event PropertyChangedEventHandler PropertyChanged;
 

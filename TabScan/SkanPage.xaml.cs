@@ -9,8 +9,8 @@ public partial class SkanPage : ContentPage
     private ObservableCollection<string> studentList = new();
     private RecordDatabase database;
     bool IsMenuOpen = false;
-    int minutes = 45;
-    int hours = 0;
+    int minutes = 30;
+    int hours = 1;
     string ScanValue = "4F3F2D";
     string selectedStudent = "";
 
@@ -83,9 +83,26 @@ public partial class SkanPage : ContentPage
 
     private void changeTime(int change)
     {
-        if (minutes > 0 && minutes < 60)
+        if (minutes < 5 && hours == 0 && change > 0)
+        {
+            minutes++;
+        }
+        else if (minutes < 10 && hours == 0 && change < 0)
+        {
+            minutes--;
+            if (minutes <= 0)
+            {
+                minutes = 1;
+            }
+        }
+        else if (minutes > 4 && minutes < 60)
         {
             minutes += change;
+            if (minutes == 60)
+            {
+                minutes = 0;
+                hours++;
+            }
             if (minutes == 0 && hours == 0)
             {
                 minutes = 5;
