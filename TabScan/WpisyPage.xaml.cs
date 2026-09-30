@@ -6,9 +6,9 @@ namespace TabScan;
 public partial class WpisyPage : ContentPage
 {
     private RecordDatabase database;
-    bool IsMenuOpen = false;
-    ObservableCollection<Date> dateCollection = new();
-
+    private bool IsMenuOpen = false;
+    private ObservableCollection<Date> dateCollection = new();
+    private string searchText = "";
 
     public WpisyPage(RecordDatabase database_)
     {
@@ -58,4 +58,19 @@ public partial class WpisyPage : ContentPage
         await Navigation.PushAsync(new SkanPage(database));
     }
 
+    private async void SearchBar_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        searchText = searchBar.Text;
+        int count = dateCollection.Count;
+        List<Date> newDates = await database.SelectAllDates((rec) => (rec.TabletId + rec.StudentData?.FirstName + rec.StudentData?.LastName).Contains(searchText.Replace(" ", "")));
+        foreach (Date date in newDates)
+        {
+            dateCollection.Add(date);
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            dateCollection.RemoveAt(0);
+        }
+    }
 }
